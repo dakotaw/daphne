@@ -1,8 +1,9 @@
+#!/usr/bin/env python
 
 import requests
 import ConfigParser
 import smtplib
-
+import os
 
 def get_freddie_type():
     """
@@ -39,7 +40,9 @@ def send_email(from_email, from_pass, to_email, subj, msg):
 def main():
     
     config = ConfigParser.ConfigParser()
-    config.readfp(open('daphne.cfg', 'r'))
+    dir_path = os.path.dirname(os.path.abspath(__file__))
+    
+    config.readfp(open(os.path.join(dir_path, 'daphne.cfg'), 'r'))
     email_user = config.get('Email', 'user')
     email_password = config.get('Email', 'password')
     to_email = config.get('Email', 'to_email')
