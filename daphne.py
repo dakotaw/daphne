@@ -42,6 +42,7 @@ def main():
     config.readfp(open('daphne.cfg', 'r'))
     email_user = config.get('Email', 'user')
     email_password = config.get('Email', 'password')
+    to_email = config.get('Email', 'to_email')
 
     current_freddie = config.get('Freddie', 'current')
     new_freddie = get_freddie_type()
@@ -49,11 +50,14 @@ def main():
     if new_freddie != current_freddie:
         send_email(from_email=email_user,
             from_pass=email_password,
-            to_email='dakotajwilliams@gmail.com',
+            to_email=to_email,
             subj = "Subject: ALERT! NEW FREDDIE AVAILABLE",
             msg="""ALERT: New Freddie available! Claim at this link: 
             http://mailchimp.com/replyall/""")
         current_freddie = new_freddie
+
+    else:
+        print 'No new Freddie.'
 
     config.set('Freddie', 'current', current_freddie)
     config.write(open('daphne.cfg', 'w'))

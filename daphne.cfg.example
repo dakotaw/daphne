@@ -1,6 +1,7 @@
 [Email]
 user = user@email.com
 password = password
+to_email = me@email.com
 
 [Freddie]
 current = Thumbs Up Freddie
